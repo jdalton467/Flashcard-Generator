@@ -12,7 +12,7 @@ inquirer.prompt([
 	{
 		"type": "list",
 		"name": "type",
-		"choices": ["user","admin"],
+		"choices": ["user","admin"],//if user selected then you will be able to study the cards, if admin is selected then you can create cards
 		"message": "Please select a login type:"
 	}
 		]).then(function(info){
@@ -37,7 +37,7 @@ inquirer.prompt([
 				         	if(info.type == "Basic"){//if basic chosen
 
 				         		var makeCard = function(){
-				         		if(count < 3){
+				         		if(count < 10){
 				         		inquirer.prompt([
 				         			{
                                       name: "front",
@@ -74,7 +74,7 @@ inquirer.prompt([
 				         	makeCard();
 				          }else{
 				          	var makeCard = function(){
-				         	if(count < 3){
+				         	if(count < 10){
 				          	inquirer.prompt([
 				         			{
                                       name: "text",
@@ -125,7 +125,7 @@ inquirer.prompt([
 		                	count = 0;
 				         	if(info.type == "Basic"){
 				         		var displayFront = function(){
-				         		if(count < 6){
+				         		if(count < 10){
 				         		fs.readFile("front.txt", "utf8", function(err,front){
 				         			if(err){
 				         				return(console.log(err))
@@ -158,7 +158,7 @@ inquirer.prompt([
 				         	displayFront();
 				         }else{
 				         	var displayCloze = function(){
-				         		if(count < 3){
+				         		if(count < 10){
 				         		fs.readFile("cloze.txt", "utf8", function(err,cloze){
 				         			if(err){
 				         				return(console.log(err))
@@ -179,7 +179,8 @@ inquirer.prompt([
 				         				return(console.log(err))
 				         			   }
 				         			  var textArr = text.split(",");
-				         			  console.log(" " + textArr[count]);
+				         			  var textreplace = textArr[count];
+				         			  console.log(">>"+ " " + textreplace.replace(clozeArr[count],textArr[count]));
 				         			  count++
 				                   	  displayCloze();
 				         			  })
