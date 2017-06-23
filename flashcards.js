@@ -6,8 +6,9 @@ var inquirer = require("inquirer"); //importing the npm inquirer package
 var Basiccard = require("./basiccard.js"); //importing the basic card constructor
 var Clozecard = require("./clozecard.js"); //importing the cloze card constructor
 var count = 0;
+start();
 
-
+function start(){
 inquirer.prompt([
 	{
 		"type": "list",
@@ -30,7 +31,7 @@ inquirer.prompt([
 				        {
 					      "type": "list",
 					      "name": "type",
-					      "choices":["Basic","cloze"],
+					      "choices":["Basic","Cloze"],
 					      "message": "Basic cards or Cloze cards?"
 				         }	
 				         ]).then(function(info){
@@ -112,26 +113,7 @@ inquirer.prompt([
 				          }
 				       })					
 					}else{
-						inquirer.prompt([
-	                      {
-		                  "type": "list",
-						  "name": "type",
-		                  "choices": ["user","admin"],//if user selected then you will be able to study the cards, if admin is selected then you can create cards
-		                  "message": "Please select a login type:"
-	                      }
-		                   ]).then(function(info){
-			               if(info.type == "admin"){ //if the admin option was selected
-			                inquirer.prompt([
-				             {
-					          "type": "list",
-					          "name": "type",
-					          "choices":["yes","no"], //decide between yes or no
-					          "message": "Would you like to make flashcards?"
-				             }
-				            
-			               ])
-			              }
-			           })
+						start();
 			         }
 			     })
 		   	   }else{
@@ -139,7 +121,7 @@ inquirer.prompt([
 				        {
 					      "type": "list",
 					      "name": "type",
-					      "choices":["Basic","cloze"],
+					      "choices":["Basic","Cloze"],
 					      "message": "Which type of flash card would you like to study?" //  users have a choice between what type of flashcard to study
 				         }	
 		                ]).then(function(info){
@@ -216,6 +198,6 @@ inquirer.prompt([
                       })
 		          }
 		      })
-		
+		};
 
 
