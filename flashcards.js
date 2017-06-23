@@ -111,7 +111,28 @@ inquirer.prompt([
 				         	 makeCard();
 				          }
 				       })					
-					}
+					}else{
+						inquirer.prompt([
+	                      {
+		                  "type": "list",
+						  "name": "type",
+		                  "choices": ["user","admin"],//if user selected then you will be able to study the cards, if admin is selected then you can create cards
+		                  "message": "Please select a login type:"
+	                      }
+		                   ]).then(function(info){
+			               if(info.type == "admin"){ //if the admin option was selected
+			                inquirer.prompt([
+				             {
+					          "type": "list",
+					          "name": "type",
+					          "choices":["yes","no"], //decide between yes or no
+					          "message": "Would you like to make flashcards?"
+				             }
+				            
+			               ])
+			              }
+			           })
+			         }
 			     })
 		   	   }else{
 		   	   	inquirer.prompt([
@@ -145,7 +166,7 @@ inquirer.prompt([
 				         				return(console.log(err))
 				         			   }
 				         			  var backArr = back.split(",");
-				         			  console.log(backArr[count]);
+				         			  console.log(">>"+backArr[count]);
 				         			  count++
 				                   	  displayFront();
 				         			  })
@@ -180,7 +201,7 @@ inquirer.prompt([
 				         			   }
 				         			  var textArr = text.split(",");
 				         			  var textreplace = textArr[count];
-				         			  console.log(">>"+ " " + textreplace.replace(clozeArr[count],textArr[count]));
+				         			  console.log(">>"+ textreplace.replace(clozeArr[count],textArr[count]));
 				         			  count++
 				                   	  displayCloze();
 				         			  })
